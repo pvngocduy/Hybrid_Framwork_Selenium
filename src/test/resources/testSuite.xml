@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite thread-count="4" name="testSuite" parallel="tests">
-    <test name="">
-
+    <test name="Run on Chrome">
+        <parameter name="browse" value="chrome"></parameter>
+        <classes>
+            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_BasePage"></class>
+        </classes>
     </test>
 </suite> <!-- Regression -->

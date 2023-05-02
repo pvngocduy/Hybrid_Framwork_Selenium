@@ -1,4 +1,4 @@
 package actions.pageObjects;
 
-public class LoginPageObject {
+public class LoginPage {
 }
