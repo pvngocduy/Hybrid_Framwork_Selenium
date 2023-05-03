@@ -61,4 +61,5 @@ public class RegisterPage extends BasePage {
     public String getMessageErrorExistEmail() {
         return getTextElement(driver, RegisterPageUI.EXIST_MAIL_ERROR_MESSAGE);
     }
+
 }

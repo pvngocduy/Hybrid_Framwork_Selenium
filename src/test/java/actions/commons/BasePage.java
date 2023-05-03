@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class BasePage {
@@ -279,5 +280,14 @@ public class BasePage {
         WebDriverWait explicitWait = new WebDriverWait(driver, duration);
         explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
     }
-
+    public boolean objectIsDisplayed(WebDriver driver, String locator){
+        return driver.findElement(By.xpath(locator)).isDisplayed();
+    }
+    public int fakeIntergerNumber (){
+        Random rd = new Random();
+        return rd.nextInt(9999);
+    }
+    public String getRandomEmail(){
+        return "abc"+ fakeIntergerNumber() + "@mail.com";
+    }
 }

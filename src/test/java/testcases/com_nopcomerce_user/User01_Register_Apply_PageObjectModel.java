@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class User01_Register_Apply_PageObjectModel {
     private WebDriver  driver;
     private BasePage basePage;
-    private String email = "abc"+ fakeIntergerNumber() + "@mail.com";
+
     private HomePage homePage ;
     private RegisterPage registerPage ;
     @BeforeClass
@@ -69,7 +69,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(email);
+        registerPage.inputToTheEmail(basePage.getRandomEmail());
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("123456");
         registerPage.clickToRegisterButton();
@@ -84,7 +84,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(email);
+        registerPage.inputToTheEmail("demotest1@gmail.com");
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("123456");
         registerPage.clickToRegisterButton();
@@ -100,7 +100,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(email);
+        registerPage.inputToTheEmail(basePage.getRandomEmail());
         registerPage.inputToThePassword("12345");
         registerPage.inputToTheConfirmPassword("12345");
         registerPage.clickToRegisterButton();
@@ -118,7 +118,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(email);
+        registerPage.inputToTheEmail(basePage.getRandomEmail());
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("1234567");
         registerPage.clickToRegisterButton();
@@ -126,10 +126,6 @@ public class User01_Register_Apply_PageObjectModel {
         Assert.assertEquals(registerPage.getErrorMessageAtConfirmPassword(),"The password and confirmation password do not match.");
        // Assert.assertEquals(basePage.getTextElement(driver,"//span[@id='ConfirmPassword-error']"),"The password and confirmation password do not match.");
 
-    }
-    public int fakeIntergerNumber (){
-        Random rd = new Random();
-        return rd.nextInt(9999);
     }
     @AfterClass
     public void afterClass() throws InterruptedException {
