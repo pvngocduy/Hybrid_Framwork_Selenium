@@ -1,10 +1,9 @@
 package testcases.com_nopcomerce_user;
 
-import actions.commons.BasePage;
-import actions.commons.BaseTest;
-import actions.pageObjects.HomePage;
-import actions.pageObjects.LoginPage;
-import actions.pageObjects.RegisterPage;
+import actions.commons.BasePageFactory;
+import actions.pageFactory.HomePageFactory;
+import actions.pageFactory.LoginPageFactory;
+import actions.pageFactory.RegisterPageFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,35 +11,36 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 @Test
-
-public class User02_Login_MultipleBrowser extends BaseTest {
+public class User02_Login_PageFactory {
     private WebDriver driver;
-    private BasePage basePage;
-    private HomePage homePage ;
-    private LoginPage loginPage ;
-    private RegisterPage registerPage;
-    private String invalidEmail="111@gmail.com";
+    private BasePageFactory basePage;
+    private HomePageFactory homePage ;
+    private LoginPageFactory loginPage ;
+    private RegisterPageFactory registerPage;
+    private String invalidEmail;
     private String wrongEmail ="abcd";
 
     private String email ;
 
-
-    @Parameters("browser")
     @BeforeClass
-    public void beforeClass(String browser){
-        basePage = BasePage.getBasePageObject();
+    public void beforeClass(){
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+        basePage = BasePageFactory.getBasePageObject();
+        homePage = new HomePageFactory(driver);
         invalidEmail = basePage.getRandomEmail();
-        driver = getBrowserDriver(browser);
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
-        registerPage = new RegisterPage(driver);
+        loginPage = new LoginPageFactory(driver);
+        registerPage = new RegisterPageFactory(driver);
         email = homePage.getRandomEmail();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.get("https://demo.nopcommerce.com/");
         homePage.clickToLoginLink();
     }
     public void Login_TC01(){
@@ -100,6 +100,7 @@ public class User02_Login_MultipleBrowser extends BaseTest {
         loginPage.clickToLoginButton();
         Assert.assertTrue(homePage.isMyAcountLinkDisplayed());
     }
+
     @AfterClass
     public void afterClass(){
         driver.quit();
