@@ -21,6 +21,7 @@ public class User01_Register_Apply_PageObjectModel {
 
     private HomePage homePage ;
     private RegisterPage registerPage ;
+    private String email="abcdef@gmail.com" ;
     @BeforeClass
     public void beforeClass(){
         WebDriverManager.chromedriver().setup();
@@ -69,7 +70,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(basePage.getRandomEmail());
+        registerPage.inputToTheEmail(email);
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("123456");
         registerPage.clickToRegisterButton();
@@ -84,7 +85,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail("demotest1@gmail.com");
+        registerPage.inputToTheEmail(email);
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("123456");
         registerPage.clickToRegisterButton();
@@ -100,7 +101,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(basePage.getRandomEmail());
+        registerPage.inputToTheEmail(email);
         registerPage.inputToThePassword("12345");
         registerPage.inputToTheConfirmPassword("12345");
         registerPage.clickToRegisterButton();
@@ -118,7 +119,7 @@ public class User01_Register_Apply_PageObjectModel {
         System.out.println("Step2: Input to require field");
         registerPage.inputToTheFirstName("Duy");
         registerPage.inputToTheLastName("Pham");
-        registerPage.inputToTheEmail(basePage.getRandomEmail());
+        registerPage.inputToTheEmail(email);
         registerPage.inputToThePassword("123456");
         registerPage.inputToTheConfirmPassword("1234567");
         registerPage.clickToRegisterButton();

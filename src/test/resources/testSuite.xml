@@ -4,7 +4,8 @@
     <test name="Run on Chrome">
         <parameter name="browse" value="chrome"></parameter>
         <classes>
-            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_BasePage"></class>
+            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_PageObjectModel"></class>
+            <class name="testcases.com_nopcomerce_user.User02_Login"></class>
         </classes>
     </test>
 </suite> <!-- Regression -->

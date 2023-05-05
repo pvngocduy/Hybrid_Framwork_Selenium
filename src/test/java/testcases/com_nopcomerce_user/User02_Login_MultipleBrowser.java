@@ -1,20 +1,22 @@
 package testcases.com_nopcomerce_user;
 
 import actions.commons.BasePage;
+import actions.commons.BaseTest;
 import actions.pageObjects.HomePage;
 import actions.pageObjects.LoginPage;
-import actions.pageObjects.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 @Test
-public class User02_Login {
+public class User02_Login_MultipleBrowser extends BaseTest {
     private WebDriver driver;
     private BasePage basePage;
     private HomePage homePage ;
@@ -26,16 +28,11 @@ public class User02_Login {
 
     @BeforeClass
     public void beforeClass(){
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
         basePage = BasePage.getBasePageObject();
-        homePage = new HomePage(driver);
         invalidEmail = basePage.getRandomEmail();
+        driver = getBrowserDriver("firefox");
+        homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://demo.nopcommerce.com/");
         homePage.clickToLoginLink();
     }
     public void Login_TC01(){
