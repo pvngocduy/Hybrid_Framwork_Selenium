@@ -29,6 +29,7 @@ public class User02_Login_PageFactory {
 
     @BeforeClass
     public void beforeClass(){
+        // update TC for using Factory
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
