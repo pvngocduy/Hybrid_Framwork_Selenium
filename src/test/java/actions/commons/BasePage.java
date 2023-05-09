@@ -1,5 +1,7 @@
 package actions.commons;
 
+import actions.pageObjects.*;
+import interfaces.pageUi.BasePageUI;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -290,4 +292,46 @@ public class BasePage {
     public String getRandomEmail(){
         return "abc"+ fakeIntergerNumber() + "@mail.com";
     }
+
+    public AddressesPage openToTheAddressesPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.ADDRESSES_LINK);
+        clickToElement(driver,BasePageUI.ADDRESSES_LINK);
+        return new AddressesPage(driver);
+    }
+    public ChangePasswordPage openToTheChangePasswordPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.CHANGE_PASSWORD_LINK);
+        clickToElement(driver,BasePageUI.CHANGE_PASSWORD_LINK);
+        return new ChangePasswordPage(driver);
+    }
+    public CustomerInforPage openToTheCustomerInfoPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.CUSTOMER_INFO_LINK);
+        clickToElement(driver,BasePageUI.CUSTOMER_INFO_LINK);
+        return new CustomerInforPage(driver);
+    }
+    public DownloadableProductPage openToTheDownloadPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.DOWNLOAD_PRODUCT_LINK);
+        clickToElement(driver,BasePageUI.DOWNLOAD_PRODUCT_LINK);
+        return new DownloadableProductPage(driver);
+    }
+    public MyProductReviewPage openToTheMyProductReviewPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.PRODUCT_REVIEW_LINK);
+        clickToElement(driver,BasePageUI.PRODUCT_REVIEW_LINK);
+        return new MyProductReviewPage(driver);
+    }
+    public OrdersPage openToTheOrderPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.ORDERS_LINK);
+        clickToElement(driver,BasePageUI.ORDERS_LINK);
+        return new OrdersPage(driver);
+    }
+    public RewardPointPage openToTheRewardPointPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.REWARD_POINT_LINK);
+        clickToElement(driver,BasePageUI.REWARD_POINT_LINK);
+        return new RewardPointPage(driver);
+    }
+    public StockSubcriptionPage openToTheStockSubcriptionPage(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.SUBCRIPTION_LINK);
+        clickToElement(driver,BasePageUI.SUBCRIPTION_LINK);
+        return new StockSubcriptionPage(driver);
+    }
+
 }

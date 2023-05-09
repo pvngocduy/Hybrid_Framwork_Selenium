@@ -3,16 +3,17 @@
 <suite thread-count="4" name="testSuite" parallel="tests">
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"></parameter>
+        <parameter name="chromeOptions" value="--remote-allow-origins=* --allowed-ips=*"></parameter>
+
         <classes>
-            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_PageObjectModel"></class>
-            <class name="testcases.com_nopcomerce_user.User02_Login_MultipleBrowser"></class>
+            <class name="testcases.com_nopcomerce_user.User02_Register_Login_Apply_Switch_UI"></class>
         </classes>
     </test>
-    <test name="Run on Edge">
-        <parameter name="browser" value="edge"></parameter>
-        <classes>
-            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_PageObjectModel"></class>
-            <class name="testcases.com_nopcomerce_user.User02_Login_MultipleBrowser"></class>
-        </classes>
-    </test>
+<!--    <test name="Run on Edge">-->
+<!--        <parameter name="browser" value="edge"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="testcases.com_nopcomerce_user.User01_Register_Apply_PageObjectModel"></class>-->
+<!--            <class name="testcases.com_nopcomerce_user.User02_Login_MultipleBrowser"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite> <!-- Regression -->
