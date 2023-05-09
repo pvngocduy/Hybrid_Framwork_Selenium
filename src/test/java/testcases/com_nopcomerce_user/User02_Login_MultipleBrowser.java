@@ -2,20 +2,15 @@ package testcases.com_nopcomerce_user;
 
 import actions.commons.BasePage;
 import actions.commons.BaseTest;
-import actions.pageObjects.HomePage;
-import actions.pageObjects.LoginPage;
-import actions.pageObjects.RegisterPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import actions.pageObjects.pageObjectsUser.HomePage;
+import actions.pageObjects.pageObjectsUser.LoginPage;
+import actions.pageObjects.pageObjectsUser.RegisterPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 @Test
 

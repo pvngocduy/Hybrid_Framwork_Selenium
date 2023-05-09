@@ -2,14 +2,13 @@ package testcases.com_nopcomerce_user;
 
 import actions.commons.BasePage;
 import actions.commons.BaseTest;
-import actions.pageObjects.HomePage;
-import actions.pageObjects.PageGeneratorManager;
-import actions.pageObjects.RegisterPage;
+import actions.pageObjects.pageObjectsUser.HomePage;
+import actions.pageObjects.pageObjectsUser.PageGeneratorManager;
+import actions.pageObjects.pageObjectsUser.RegisterPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;

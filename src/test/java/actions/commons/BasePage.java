@@ -1,7 +1,8 @@
 package actions.commons;
 
-import actions.pageObjects.*;
-import interfaces.pageUi.BasePageUI;
+import actions.pageObjects.pageObjectsAdmin.AdminLoginPage;
+import actions.pageObjects.pageObjectsUser.*;
+import interfaces.commonUI.BasePageUI;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -10,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -285,7 +285,7 @@ public class BasePage {
     public boolean objectIsDisplayed(WebDriver driver, String locator){
         return driver.findElement(By.xpath(locator)).isDisplayed();
     }
-    public int fakeIntergerNumber (){
+    public static int fakeIntergerNumber (){
         Random rd = new Random();
         return rd.nextInt(9999);
     }
@@ -332,6 +332,16 @@ public class BasePage {
         waitForAllElementVisible(driver, BasePageUI.SUBCRIPTION_LINK);
         clickToElement(driver,BasePageUI.SUBCRIPTION_LINK);
         return new StockSubcriptionPage(driver);
+    }
+    public AdminLoginPage clickToLogoutAtAdmin(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.LOGOUT_AT_ADMIN_PAGE);
+        clickToElement(driver,BasePageUI.LOGOUT_AT_ADMIN_PAGE);
+        return PageGeneratorManager.getAdminLoginPage(driver);
+    }
+    public HomePage clickToLogoutAtUser(WebDriver driver){
+        waitForAllElementVisible(driver, BasePageUI.LOGOUT_AT_USER_PAGE);
+        clickToElement(driver,BasePageUI.LOGOUT_AT_USER_PAGE);
+        return PageGeneratorManager.getHomePageObject(driver);
     }
 
 }

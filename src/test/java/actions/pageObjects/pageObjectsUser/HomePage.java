@@ -1,7 +1,10 @@
-package actions.pageObjects;
+package actions.pageObjects.pageObjectsUser;
 
 import actions.commons.BasePage;
-import interfaces.pageUi.HomePageUI;
+import actions.pageObjects.pageObjectsAdmin.AdminLoginPage;
+import actions.pageObjects.pageObjectsAdmin.DashBoardPage;
+import interfaces.commonUI.BasePageUI;
+import interfaces.pageUserUI.HomePageUI;
 import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage {
@@ -35,6 +38,10 @@ public class HomePage extends BasePage {
     }
     public boolean isMyAcountLinkDisplayed(){
         return objectIsDisplayed(driver,HomePageUI.MY_ACCOUNT_LINK);
+    }
+    public AdminLoginPage switchToAdminPage(){
+        openUrl(driver, BasePageUI.ADMIN_PORTAL_LINK);
+        return PageGeneratorManager.getAdminLoginPage(driver);
     }
     public void setExistingEmail(String emailExist){
         email = emailExist;

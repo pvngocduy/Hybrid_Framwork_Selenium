@@ -1,4 +1,4 @@
-package interfaces.pageUi;
+package interfaces.pageUserUI;
 
 public class RegisterPageUI {
     public static final String FIRST_NAME_TEXT_BOX = "//input[@id='FirstName']";

@@ -1,12 +1,21 @@
-package actions.pageObjects;
+package actions.pageObjects.pageObjectsUser;
 
 
 import actions.commons.BasePage;
-import interfaces.pageUi.RegisterPageUI;
+import data_test.RegisterData;
+import interfaces.pageUserUI.RegisterPageUI;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class RegisterPage extends BasePage {
     private WebDriver driver;
+    private String email = "abc"+BasePage.fakeIntergerNumber()+"@gmail.com";
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return RegisterData.passWord;
+    }
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -35,22 +44,27 @@ public class RegisterPage extends BasePage {
     }
 
     public void inputToTheFirstName(String firstName) {
+        waitForElementVisible(driver, RegisterPageUI.FIRST_NAME_TEXT_BOX);
         sendKeyToElement(driver, RegisterPageUI.FIRST_NAME_TEXT_BOX, firstName);
     }
 
     public void inputToTheLastName(String lastName) {
+        waitForElementVisible(driver, RegisterPageUI.LAST_NAME_TEXT_BOX);
         sendKeyToElement(driver, RegisterPageUI.LAST_NAME_TEXT_BOX, lastName);
     }
 
     public void inputToTheEmail(String email) {
+        waitForElementVisible(driver, RegisterPageUI.EMAIL_TEXT_BOX);
         sendKeyToElement(driver, RegisterPageUI.EMAIL_TEXT_BOX, email);
     }
 
     public void inputToThePassword(String password) {
+        waitForElementVisible(driver, RegisterPageUI.PASSWORD_TEXT_BOX);
         sendKeyToElement(driver, RegisterPageUI.PASSWORD_TEXT_BOX, password);
     }
 
     public void inputToTheConfirmPassword(String confirmPassword) {
+        waitForElementVisible(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXT_BOX);
         sendKeyToElement(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXT_BOX, confirmPassword);
     }
 
@@ -61,5 +75,14 @@ public class RegisterPage extends BasePage {
     public String getMessageErrorExistEmail() {
         return getTextElement(driver, RegisterPageUI.EXIST_MAIL_ERROR_MESSAGE);
     }
-
+    public LoginPage registerUserPortal() {
+        inputToTheFirstName(RegisterData.firstName);
+        inputToTheLastName(RegisterData.lastName);
+        inputToTheEmail(email);
+        inputToThePassword(RegisterData.passWord);
+        inputToTheConfirmPassword(RegisterData.confirmPassword);
+        clickToRegisterButton();
+        Assert.assertEquals(getSuccessMessage(), "Your registration completed");
+        return PageGeneratorManager.getLoginPageObject(driver);
+    }
 }

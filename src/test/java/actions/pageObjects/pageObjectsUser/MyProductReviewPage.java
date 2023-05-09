@@ -1,4 +1,4 @@
-package actions.pageObjects;
+package actions.pageObjects.pageObjectsUser;
 
 import actions.commons.BasePage;
 import org.openqa.selenium.WebDriver;

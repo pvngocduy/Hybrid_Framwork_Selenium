@@ -1,9 +1,9 @@
 package testcases.com_nopcomerce_user;
 
 import actions.commons.BasePage;
-import actions.pageObjects.HomePage;
-import actions.pageObjects.LoginPage;
-import actions.pageObjects.RegisterPage;
+import actions.pageObjects.pageObjectsUser.HomePage;
+import actions.pageObjects.pageObjectsUser.LoginPage;
+import actions.pageObjects.pageObjectsUser.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

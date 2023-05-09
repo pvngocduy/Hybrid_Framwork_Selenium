@@ -1,5 +1,7 @@
-package actions.pageObjects;
+package actions.pageObjects.pageObjectsUser;
 
+import actions.pageObjects.pageObjectsAdmin.AdminLoginPage;
+import actions.pageObjects.pageObjectsAdmin.DashBoardPage;
 import org.openqa.selenium.WebDriver;
 
 public class PageGeneratorManager {
@@ -16,4 +18,10 @@ public class PageGeneratorManager {
         return new MyAccountPage(driver);
     }
 
+    public static DashBoardPage getDashBoardPageObject(WebDriver driver) {
+        return new DashBoardPage(driver);
+    }
+    public static AdminLoginPage getAdminLoginPage(WebDriver driver) {
+        return new AdminLoginPage(driver);
+    }
 }

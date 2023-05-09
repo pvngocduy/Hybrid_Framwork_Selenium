@@ -2,7 +2,7 @@ package actions.pageFactory;
 
 
 import actions.commons.BasePage;
-import interfaces.pageUi.RegisterPageUI;
+import interfaces.pageUserUI.RegisterPageUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 

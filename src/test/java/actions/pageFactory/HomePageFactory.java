@@ -1,8 +1,6 @@
 package actions.pageFactory;
 
-import actions.commons.BasePage;
 import actions.commons.BasePageFactory;
-import interfaces.pageUi.HomePageUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
