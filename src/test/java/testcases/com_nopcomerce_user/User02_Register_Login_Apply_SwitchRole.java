@@ -51,12 +51,13 @@ public class User02_Register_Login_Apply_SwitchRole extends BaseTest {
     }
     @Test
     public void switchToUserPage(){
+        homePage = dashBoardPage.switchToUserPage();
 
     }
 
     @AfterClass
     public void afterClass() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         driver.quit();
     }
 }
