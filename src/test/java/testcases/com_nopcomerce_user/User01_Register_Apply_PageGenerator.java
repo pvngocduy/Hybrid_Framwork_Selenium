@@ -23,13 +23,11 @@ public class User01_Register_Apply_PageGenerator extends BaseTest {
 
     @BeforeClass
     public void beforeClass(){
-        driver = getBrowserDriver("chrome");
+        driver = getBrowserDriver("chrome","https://demo.nopcommerce.com/");
         basePage = BasePage.getBasePageObject();
         homePage = PageGeneratorManager.getHomePageObject(driver);
         registerPage = PageGeneratorManager.getRegisterPageObject(driver);
         email =  basePage.getRandomEmail();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://demo.nopcommerce.com/");
     }
     @Test
     public void TC_01_Register_Empty_Data(){

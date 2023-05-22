@@ -20,16 +20,14 @@ public class User01_Register_Apply_PageObjectModel extends BaseTest {
     private HomePage homePage ;
     private RegisterPage registerPage ;
     private String email;
-    @Parameters("browser")
+    @Parameters({"browser","url"})
     @BeforeClass
-    public void beforeClass(String browser){
-        driver = getBrowserDriver(browser);
+    public void beforeClass(String browser, String url){
+        driver = getBrowserDriver(browser, url);
         basePage = BasePage.getBasePageObject();
         homePage = new HomePage(driver);
         registerPage = new RegisterPage(driver);
         email =  basePage.getRandomEmail();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://demo.nopcommerce.com/");
     }
     @Test
     public void TC_01_Register_Empty_Data(){

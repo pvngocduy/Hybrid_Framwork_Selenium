@@ -1,6 +1,7 @@
 package testcases.com_nopcomerce_user;
 
 import actions.commons.BasePage;
+import actions.commons.BaseTest;
 import actions.pageObjects.pageObjectsUser.HomePage;
 import actions.pageObjects.pageObjectsUser.LoginPage;
 import actions.pageObjects.pageObjectsUser.RegisterPage;
@@ -11,10 +12,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 
 @Test
-public class User02_Login {
+
+public class User02_Login extends BaseTest {
     private WebDriver driver;
     private BasePage basePage;
     private HomePage homePage ;
@@ -43,22 +46,32 @@ public class User02_Login {
     }
     public void Login_TC01(){
         System.out.println("Login_TC01");
+        log.info("TC01-Login-Step1: Click to Login");
         loginPage.clickToLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageAtEmail(),"Please enter your email");
+        log.info("TC01-Login-Step2: Verify mesage");
+        checkEquals(loginPage.getErrorMessageAtEmail(),"Please enter your email");
     }
     public void Login_TC02(){
         System.out.println("Login_TC02");
+        log.info("TC02-Login with wrong email -Step1: Enter wrong email: "+wrongEmail);
         loginPage.inputToTheEmail(wrongEmail);
+        log.info("TC02-Login-Step2: Click to Login");
         loginPage.clickToLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageAtEmail(),"Wrong email");
+        log.info("TC02-Login-Step3: Verify message");
+        checkEquals(loginPage.getErrorMessageAtEmail(),"Wrong email");
     }
     public void Login_TC03(){
         System.out.println("Login_TC03");
+        log.info("TC03-Login-Step1: input valid email: "+invalidEmail);
         loginPage.inputToTheEmail(invalidEmail);
+        log.info("TC03-Login-Step2: input password");
         loginPage.inputToThePassword("123456");
+        log.info("TC03-Login-Step3: Click to Login");
         loginPage.clickToLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
-                "No customer account found");
+        log.info("TC03-Login-Step4: Verify message");
+       // checkEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again. No customer account found");
+        verifyEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
+                "No customer account found11111");
     }
     public void Login_TC04(){
         System.out.println("Precondition Create Account");
@@ -73,30 +86,38 @@ public class User02_Login {
         registerPage.inputToTheConfirmPassword("123456");
         registerPage.clickToRegisterButton();
         System.out.println("Step3: Verify registration completed");
-        Assert.assertEquals(registerPage.getSuccessMessage(),"Your registration completed");
+        checkEquals(registerPage.getSuccessMessage(),"Your registration completed");
         System.out.println("Login_TC04");
         homePage.clickToLoginLink();
         loginPage.inputToTheEmail(email);
         loginPage.clickToLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
+        verifyEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
                 "The credentials provided are incorrect");
     }
 
 
     public void Login_TC05(){
         System.out.println("Login_TC05");
+        log.info("TC05-Login-Step1: Input email: "+email);
         loginPage.inputToTheEmail(email);
+        log.info("TC05-Login-Step2: Input password");
         loginPage.inputToThePassword("1234567");
+        log.info("TC05-Login-Step3: Click to Login");
         loginPage.clickToLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
+        log.info("TC05-Login-Step4: Verify message");
+        verifyEquals(loginPage.getErrorMessageLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" +
                 "The credentials provided are incorrect");
     }
     public void Login_TC06(){
         System.out.println("Login_TC06");
+        log.info("TC06-Login-Step1: Input email: "+email);
         loginPage.inputToTheEmail(email);
+        log.info("TC06-Login-Step2: Input password");
         loginPage.inputToThePassword("123456");
+        log.info("TC06-Login-Step3: Click to Login");
         loginPage.clickToLoginButton();
-        Assert.assertTrue(homePage.isMyAcountLinkDisplayed());
+        log.info("TC06-Login-Step4: Verify message");
+        verifyTrue(homePage.isMyAcountLinkDisplayed());
     }
 
     @AfterClass

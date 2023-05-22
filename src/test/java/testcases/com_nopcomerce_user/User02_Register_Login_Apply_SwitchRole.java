@@ -28,11 +28,9 @@ public class User02_Register_Login_Apply_SwitchRole extends BaseTest {
 
     @BeforeClass
     public void beforeClass(){
-        driver = getBrowserDriver("chrome");
+        driver = getBrowserDriver("chrome","https://demo.nopcommerce.com/");
         // driver.manage().window().maximize();
         homePage = PageGeneratorManager.getHomePageObject(driver);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://demo.nopcommerce.com/");
         registerPage = homePage.clickToRegisterLink();
         loginPage = registerPage.registerUserPortal();
     }

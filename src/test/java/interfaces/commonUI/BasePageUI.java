@@ -11,6 +11,7 @@ public class BasePageUI {
     public static final String ORDERS_LINK = "xpath=//div[contains(@class,'account-navigation')]//a[text()='Orders']";
     public static final String REWARD_POINT_LINK = "xpath=//div[contains(@class,'account-navigation')]//a[text()='Reward points']";
     public static final String SUBCRIPTION_LINK = "xpath=//div[contains(@class,'account-navigation')]//a[text()='Back in stock subscriptions']";
+    public static final String DYNAMIC_MYACCOUNT_PAGE ="xpath=//div[@class='block block-account-navigation']//a[text()='%s']";
     public static final String LOGOUT_AT_ADMIN_PAGE ="xpath=//a[contains(text(),'Logout')]";
     public static final String LOGOUT_AT_USER_PAGE ="xpath=//a[@class = 'ico-logout']";
 }

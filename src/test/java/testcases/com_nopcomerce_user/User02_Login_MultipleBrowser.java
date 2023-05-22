@@ -26,12 +26,12 @@ public class User02_Login_MultipleBrowser extends BaseTest {
     private String email ;
 
 
-    @Parameters("browser")
+    @Parameters({"browser","url"})
     @BeforeClass
-    public void beforeClass(String browser){
+    public void beforeClass(String browser, String url){
         basePage = BasePage.getBasePageObject();
         invalidEmail = basePage.getRandomEmail();
-        driver = getBrowserDriver(browser);
+        driver = getBrowserDriver(browser, url);
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);

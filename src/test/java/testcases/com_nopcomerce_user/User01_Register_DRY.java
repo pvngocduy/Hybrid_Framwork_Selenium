@@ -1,5 +1,7 @@
 package testcases.com_nopcomerce_user;
 
+import actions.commons.BasePage;
+import actions.commons.GlobalConstant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +15,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class User01_Register_DRY {
+public class User01_Register_DRY  {
     private WebDriver  driver;
     @BeforeClass
     public void beforeClass(){
@@ -90,6 +92,17 @@ public class User01_Register_DRY {
         Assert.assertEquals(driver.findElement(By.cssSelector("#ConfirmPassword-error")).getText(),"The password and confirmation password do not match.");
 
     }
+//    @Test
+//    public void TC08(){
+//        String[] fileName = {"CSharp.png","Java.png", "Python.png"};
+//        String filePath = GlobalConstant.UPLOADFILE;
+//        String fullFileName = "";
+//        for(String file: fileName){
+//            fullFileName = fullFileName + filePath + file + "\n";
+//        }
+//        fullFileName = fullFileName.trim();
+//        System.out.println(fullFileName);
+//    }
     public int fakeIntergerNumber (){
         Random rd = new Random();
         return rd.nextInt(9999);

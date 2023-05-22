@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class User02_Register_Login_Apply_Switch_UI extends BaseTest {
+public class User02_Register_Login_Apply_RestParamester extends BaseTest {
     private WebDriver  driver;
     private BasePage basePage;
 
@@ -24,13 +24,19 @@ public class User02_Register_Login_Apply_Switch_UI extends BaseTest {
     private ChangePasswordPage changePasswordPage;
     private CustomerInforPage customerInforPage;
     private MyProductReviewPage myProductReviewPage;
+    private DownloadableProductPage downloadableProductPage;
+
+    private OrdersPage ordersPage;
+    private RewardPointPage rewardPointPage;
+    private StockSubcriptionPage stockSubcriptionPage;
 
     @BeforeClass
     public void beforeClass(){
-        driver = getBrowserDriver("chrome","https://demo.nopcommerce.com/");
+        driver = getBrowserDriver("chrome", "https://demo.nopcommerce.com/");
         basePage = BasePage.getBasePageObject();
         email =  basePage.getRandomEmail();
         homePage = PageGeneratorManager.getHomePageObject(driver);
+        driver.manage().window().maximize();
     }
 
     @Test
@@ -62,9 +68,14 @@ public class User02_Register_Login_Apply_Switch_UI extends BaseTest {
     public void TC_03_SwitchBetweenUI(){
         System.out.println("TC_03_SwitchBetweenUI");
         myAccountPage = homePage.clickToMyAccountLink();
-        addressesPage = myAccountPage.openToTheAddressesPage(driver);
-        changePasswordPage = addressesPage.openToTheChangePasswordPage(driver);
-        customerInforPage = changePasswordPage.openToTheCustomerInfoPage(driver);
+        customerInforPage = (CustomerInforPage) basePage.openMyAccountPageByName(driver,"Customer info");
+        addressesPage = (AddressesPage) basePage.openMyAccountPageByName(driver,"Addresses");
+        changePasswordPage = (ChangePasswordPage) basePage.openMyAccountPageByName(driver,"Change password");
+        downloadableProductPage = (DownloadableProductPage) basePage.openMyAccountPageByName(driver,"Downloadable products");
+        myProductReviewPage = (MyProductReviewPage) basePage.openMyAccountPageByName(driver,"My product reviews");
+        ordersPage = (OrdersPage) basePage.openMyAccountPageByName(driver,"Orders");
+        rewardPointPage = (RewardPointPage) basePage.openMyAccountPageByName(driver,"Reward points");
+        stockSubcriptionPage = (StockSubcriptionPage) basePage.openMyAccountPageByName(driver,"Back in stock subscriptions");
     }
     @AfterClass
     public void afterClass() throws InterruptedException {
