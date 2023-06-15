@@ -2,6 +2,7 @@ package actions.pageObjects.pageObjectJqueryData;
 
 import actions.commons.BasePage;
 import interfaces.jQueryUI.HomePageUploadUI;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -17,6 +18,7 @@ public class HomePageUploadFile extends BasePage {
         waitForAllElementVisible(driver, HomePageUploadUI.FILENAME_LOADED, fileName);
         return objectIsDisplayed(driver, HomePageUploadUI.FILENAME_LOADED, fileName);
     }
+    @Step("Click to Start Button")
     public void clickToStartButton(){
         List<WebElement> startButtons = getElements(driver, HomePageUploadUI.BUTTON_UPLOAD);
         for(WebElement startButton : startButtons){

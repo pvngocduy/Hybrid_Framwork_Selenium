@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="4" parallel="tests" name="Failed suite [wordpress]" guice-stage="DEVELOPMENT">
+  <test thread-count="4" parallel="tests" name="Run on Chrome(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url_user" value="http://localhost/"/>
+    <parameter name="url_admin" value="http://localhost/wp-admin/"/>
+    <classes>
+      <class name="testcases.com_wordpress_post.Test_02_Verify_user">
+        <methods>
+          <include name="User_01_Verify_Number_User"/>
+          <include name="initBeforeSuite"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- testcases.com_wordpress_post.Test_02_Verify_user -->
+    </classes>
+  </test> <!-- Run on Chrome(failed) -->
+</suite> <!-- Failed suite [wordpress] -->

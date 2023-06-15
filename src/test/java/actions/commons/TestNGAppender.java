@@ -10,12 +10,13 @@ public class TestNGAppender extends AppenderSkeleton {
 
     @Override
     protected void append(LoggingEvent event) {
-        Reporter.log(getLayout().format(event) + "<br>");
+        Reporter.log(getLayout().format(event));
     }
 
     @Override
     public void close() {
         Reporter.log("Logging appender is closed");
+
     }
 
     @Override
@@ -24,7 +25,7 @@ public class TestNGAppender extends AppenderSkeleton {
     }
 
     /**
-     * Insert log message into ReportNG
+     * Insert log message into ReportNGListener
      * @param logMessage
      */
     public void info(String logMessage) {

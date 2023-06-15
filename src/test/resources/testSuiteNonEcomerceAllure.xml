@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="4" name="testSuite" parallel="tests">
+    <listeners>
+        <listener class-name="actions.Utils.listeners.ReportListener"></listener>
+        <listener class-name="actions.Utils.extentreports.ExtentTestListener"></listener>
+   </listeners>-->
+    <test name="Run on Chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="chromeOptions" value="--remote-allow-origins=* --allowed-ips=*"></parameter>
+        <parameter name="url" value="https://demo.nopcommerce.com/"></parameter>
+        <classes>
+            <class name="testcases.com_nopcomerce_user.User02_Login_Allure_Report"></class>
+        </classes>
+    </test>
+</suite> <!-- Regression -->

@@ -1,9 +1,14 @@
 package actions.commons;
 
+import actions.pageObjects.pageObject_Wordpress_Admin.AdminDashboardPageObject;
+import actions.pageObjects.pageObject_Wordpress_Admin.PageWPGeneratorManager;
+import actions.pageObjects.pageObject_Wordpress_User.UserHomePageObject;
 import actions.pageObjects.pageObjectsAdmin.AdminLoginPage;
 import actions.pageObjects.pageObjectsUser.*;
+import interfaces.com_saulabs_ui.ProductPageUI;
 import interfaces.commonUI.BasePageUI;
 import interfaces.jQueryUI.HomePageUploadUI;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -12,11 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
@@ -127,7 +130,7 @@ public class BasePage {
     public WebElement getElement(WebDriver driver, String locatorType){
         return driver.findElement(getByLocator(locatorType));
     }
-    private WebElement getElement(WebDriver driver, String locatorType, String...value){
+    protected WebElement getElement(WebDriver driver, String locatorType, String... value){
         return driver.findElement(getByLocator(getDynamicXpath(locatorType, value)));
     }
     public List<WebElement> getElements(WebDriver driver, String locatorType){
@@ -149,8 +152,12 @@ public class BasePage {
     }
     public void sendKeyToElement(WebDriver driver, String locatorType, String keyValue, String...value){
         WebElement element = getElement(driver, getDynamicXpath(locatorType,value));
-        //element.clear();
+        element.clear();
         element.sendKeys(keyValue);
+    }
+    public void clearValueInElementByDeleteKey(WebDriver driver, String locatorType){
+        WebElement element = this.getElement(driver, locatorType);
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a" , Keys.DELETE));
     }
 //    private WebElement getElement(WebDriver driver, String locator){
 //        return driver.findElement(getByXpath(locator));
@@ -191,7 +198,7 @@ public class BasePage {
         List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXpath(childItemLocator)));
         for (WebElement item : allItems) {
             if (item.getText().trim().equals(expectedItem)) {
-                 JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+                JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
                 jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
                 sleepInSecond(1);
                 item.click();
@@ -210,6 +217,9 @@ public class BasePage {
     }
     public String getElementAttribute(WebDriver driver, String locator, String attributeName){
         return getElement(driver, locator).getAttribute(attributeName);
+    }
+    public String getElementAttribute(WebDriver driver, String locator, String attributeName, String...value){
+        return getElement(driver, getDynamicXpath(locator, value)).getAttribute(attributeName);
     }
     public String getElementCssValue(WebDriver driver, String locator, String attributeName, String propertyName){
         return getElement(driver, locator).getCssValue(propertyName);
@@ -426,6 +436,44 @@ public class BasePage {
     public String getRandomEmail(){
         return "abc"+ fakeIntergerNumber() + "@mail.com";
     }
+    public Set<Cookie> getAllCookies(WebDriver driver){
+        return driver.manage().getCookies();
+    }
+    public void setCookies(WebDriver driver, Set<Cookie> cookies){
+        for (Cookie cookie: cookies){
+            driver.manage().addCookie(cookie);
+        }
+        sleepInSecond(3);
+    }
+    public void inputToTextBoxById(WebDriver driver, String id, String value){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
+        sendKeyToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, id);
+    }
+    public void clickToElementByName(WebDriver driver, String name){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_LINK_BY_NAME, name);
+        clickToElement(driver, BasePageUI.DYNAMIC_LINK_BY_NAME, name);
+    }
+    public void clickToButtonByName(WebDriver driver, String name){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, name);
+        clickToElement(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, name);
+    }
+    public void selectDropdownByName(WebDriver driver, String name, String value){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, name);
+        selectedItemInDefaultDropdown(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, value, name);
+    }
+    public void clickToRadioButtonByName(WebDriver driver, String name){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BY_NAME, name);
+        clickToElement(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BY_NAME, name);
+    }
+    public void clickToCheckboxByName(WebDriver driver, String name){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_CHECKBOX_BY_NAME, name);
+        clickToElement(driver, BasePageUI.DYNAMIC_CHECKBOX_BY_NAME, name);
+    }
+    public String getTextBoxVauleById(WebDriver driver, String name){
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, name);
+        return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID,"value", name);
+    }
+
     // Handle switch MyAccount nav-bar ver1
     public AddressesPage openToTheAddressesPage(WebDriver driver){
         waitForAllElementVisible(driver, BasePageUI.ADDRESSES_LINK);
@@ -495,6 +543,7 @@ public class BasePage {
 
         return null;
     }
+    @Step("Upload Multiple Files")
     public void uploadMultipleFiles(WebDriver driver, String...fileName){
         String filePath = GlobalConstant.UPLOADFILE;
         String fullFileName = "";
@@ -503,6 +552,82 @@ public class BasePage {
         }
         fullFileName = fullFileName.trim();
         getElement(driver, HomePageUploadUI.UPLOAD_FILE).sendKeys(fullFileName);
+    }
+    public UserHomePageObject openUserHomePage(WebDriver driver, String url){
+        openUrl(driver, url);
+        return PageWPGeneratorManager.getUserHomePageObject(driver);
+    }
+    public AdminDashboardPageObject openDashBoardPage(WebDriver driver, String url){
+        openUrl(driver, url);
+        return PageWPGeneratorManager.getDashBoardPageObject(driver);
+    }
+    public boolean isDataSortByAsc(WebDriver driver, String locator){
+        List<WebElement> listProductElement = getElements(driver, locator);
+        ArrayList<String> arrList = new ArrayList<>();
+        for(WebElement element: listProductElement){
+            arrList.add(element.getText());
+        }
+        ArrayList<String> sortedList = new ArrayList<>();
+        for(String list: arrList){
+            sortedList.add(list);
+        }
+        Collections.sort(sortedList);
+        return sortedList.equals(arrList);
+    }
+    public boolean isDataSortByDesc(WebDriver driver, String locator){
+        List<WebElement> listProductElement = getElements(driver,locator);
+        ArrayList<String> arrList = new ArrayList<>();
+        for(WebElement element: listProductElement){
+            arrList.add(element.getText());
+        }
+        ArrayList<String> sortedList = new ArrayList<>();
+        for(String list: arrList){
+            sortedList.add(list);
+        }
+        Collections.sort(sortedList);
+        Collections.reverse(sortedList);
+        return sortedList.equals(arrList);
+    }
+    public boolean isFloatDataSortByAsc(WebDriver driver, String locator){
+        List<WebElement> listProductElement = getElements(driver,locator);
+        ArrayList<Float> arrList = new ArrayList<>();
+        for(WebElement element: listProductElement){
+            arrList.add(Float.parseFloat(element.getText().replace("$","").trim()));
+        }
+        for(Float arr: arrList){
+            System.out.println("- "+arr);
+        }
+        ArrayList<Float> sortedList = new ArrayList<>();
+        for(Float list: arrList){
+            sortedList.add(list);
+        }
+        Collections.sort(sortedList);
+        System.out.println("-----------------------");
+        for(Float arr: sortedList){
+            System.out.println("- "+arr);
+        }
+        return sortedList.equals(arrList);
+    }
+    public boolean isFloatDataSortByDesc(WebDriver driver, String locator){
+        List<WebElement> listProductElement = getElements(driver,locator);
+        ArrayList<Float> arrList = new ArrayList<>();
+        for(WebElement element: listProductElement){
+            arrList.add(Float.parseFloat(element.getText().replace("$","").trim()));
+        }
+        for(Float arr: arrList){
+            System.out.println("- "+arr);
+        }
+        ArrayList<Float> sortedList = new ArrayList<>();
+        for(Float list: arrList){
+            sortedList.add(list);
+        }
+        Collections.sort(sortedList);
+        Collections.reverse(sortedList);
+        System.out.println("-----------------------");
+        for(Float arr: sortedList){
+            System.out.println("- "+arr);
+        }
+        return sortedList.equals(arrList);
     }
 
 //    public AdminLoginPage clickToLogoutAtAdmin(WebDriver driver){

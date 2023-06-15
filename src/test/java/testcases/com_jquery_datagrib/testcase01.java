@@ -21,29 +21,29 @@ public class testcase01 extends BaseTest {
 
     }
 
-//    @Test
-//    public void TC_01_switchBetwenPageByNumber(){
-//        homePage.clickToPageByNumber(5);
-//        Assert.assertTrue(homePage.isPageSelected(5));
-//        homePage.clickToPageByNumber(10);
-//        Assert.assertTrue(homePage.isPageSelected(10));
-//        homePage.clickToPageByNumber(15);
-//        Assert.assertTrue(homePage.isPageSelected(15));
-//        homePage.clickToPageByNumber(20);
-//        Assert.assertTrue(homePage.isPageSelected(20));
-//    }
-//    @Test
-//    public void TC_02_inputTextToHeaderField(){
-//        homePage.inputToHeaderByName("Females","11111");
-//        homePage.inputToHeaderByName("Country","11111");
-//        homePage.inputToHeaderByName("Males","11111");
-//        homePage.inputToHeaderByName("Total","11111");
-//    }
-//    @Test
-//    public void TC_03_getAllDataOfTable(){
-//        homePage.refreshCurrentPage(driver);
-//        homePage.getAllDataOfTable();
-//    }
+    @Test
+    public void TC_01_switchBetwenPageByNumber(){
+        homePage.clickToPageByNumber(5);
+        Assert.assertTrue(homePage.isPageSelected(5));
+        homePage.clickToPageByNumber(10);
+        Assert.assertTrue(homePage.isPageSelected(10));
+        homePage.clickToPageByNumber(15);
+        Assert.assertTrue(homePage.isPageSelected(15));
+        homePage.clickToPageByNumber(20);
+        Assert.assertTrue(homePage.isPageSelected(20));
+    }
+    @Test
+    public void TC_02_inputTextToHeaderField(){
+        homePage.inputToHeaderByName("Females","11111");
+        homePage.inputToHeaderByName("Country","11111");
+        homePage.inputToHeaderByName("Males","11111");
+        homePage.inputToHeaderByName("Total","11111");
+    }
+    @Test
+    public void TC_03_getAllDataOfTable(){
+        homePage.refreshCurrentPage(driver);
+        homePage.getAllDataOfTable();
+    }
     @Test
     public void TC_04_getAllDataOfTableNotDuplicateWithCountry(){
         homePage.refreshCurrentPage(driver);

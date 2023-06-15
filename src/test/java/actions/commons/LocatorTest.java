@@ -1,8 +1,10 @@
 package actions.commons;
 
-import org.junit.jupiter.api.Test;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.Test;
+
 
 public class LocatorTest {
     BasePage basePage = new BasePage();

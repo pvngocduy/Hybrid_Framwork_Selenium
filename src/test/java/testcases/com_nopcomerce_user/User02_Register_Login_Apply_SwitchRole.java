@@ -1,20 +1,18 @@
 package testcases.com_nopcomerce_user;
 
 import actions.commons.BaseTest;
+import actions.Utils.helpers.RecordVideo;
 import actions.pageObjects.pageObjectsAdmin.AdminLoginPage;
 import actions.pageObjects.pageObjectsAdmin.DashBoardPage;
 import actions.pageObjects.pageObjectsUser.HomePage;
 import actions.pageObjects.pageObjectsUser.LoginPage;
 import actions.pageObjects.pageObjectsUser.PageGeneratorManager;
 import actions.pageObjects.pageObjectsUser.RegisterPage;
-import interfaces.commonUI.BasePageUI;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class User02_Register_Login_Apply_SwitchRole extends BaseTest {
@@ -27,12 +25,13 @@ public class User02_Register_Login_Apply_SwitchRole extends BaseTest {
     private DashBoardPage dashBoardPage;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() throws Exception {
         driver = getBrowserDriver("chrome","https://demo.nopcommerce.com/");
         // driver.manage().window().maximize();
         homePage = PageGeneratorManager.getHomePageObject(driver);
         registerPage = homePage.clickToRegisterLink();
         loginPage = registerPage.registerUserPortal();
+        RecordVideo.startRecord("ManageDocument");
     }
 
     @Test
@@ -54,8 +53,9 @@ public class User02_Register_Login_Apply_SwitchRole extends BaseTest {
     }
 
     @AfterClass
-    public void afterClass() throws InterruptedException {
+    public void afterClass() throws Exception {
         Thread.sleep(1000);
+        RecordVideo.stopRecord();
         driver.quit();
     }
 }

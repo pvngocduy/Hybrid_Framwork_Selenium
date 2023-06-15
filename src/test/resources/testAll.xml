@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="4" name="testSuite" parallel="tests">
+    <suite-files>
+        <suite-file path="testSuiteNonEcomerceApplyShareCookie.xml"></suite-file>
+        <suite-file path="testSuiteNonEcomerceApplyShareCookie2.xml"></suite-file>
+    </suite-files>
+</suite> <!-- Regression -->
