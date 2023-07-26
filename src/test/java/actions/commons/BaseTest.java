@@ -1,5 +1,6 @@
 package actions.commons;
 
+import actions.browserFactory.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 
@@ -89,6 +90,30 @@ public class BaseTest {
             }
         }
     }
+    protected WebDriver getBrowserDriverV2(String browserName, String url){
+        Browser browser = Browser.valueOf(browserName.toUpperCase());
+        switch(browser){
+            case CHROME:
+                driver = new ChromeDriverManager().getBrowserDriver();
+                break;
+            case FIREFOX:
+                driver = new FireFoxDriverManager().getBrowserDriver();
+                break;
+            case H_CHROME:
+                driver = new HeadlessChromeDriverManager().getBrowserDriver();
+                break;
+            case EDGE:
+                driver = new EdgeDriverManager().getBrowserDriver();
+                break;
+            default:
+                new BrowserNotSupportedException(browserName);
+        }
+        driver.manage().window().setPosition(new Point(0,0));
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get(url);
+        return driver;
+    }
     protected WebDriver getBrowserDriver(String browserName, String url){
         if(browserName.equals("firefox")){
             WebDriverManager.firefoxdriver().setup();
@@ -113,6 +138,21 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get(url);
         return driver;
+    }
+    public String getEnvironment(String envName){
+        String url = null;
+        if(envName.equals("dev")){
+            url = "https://demo.nopcommerce.com/";
+        }else if(envName.equals("testing")){
+            url = "https://demo.nopcommerce.com/";
+        }else if(envName.equals("staging")){
+            url = "https://demo.nopcommerce.com/";
+        }else if(envName.equals("live")){
+            url = "https://demo.nopcommerce.com/";
+        }else{
+            throw new RuntimeException("Pls input correct environment");
+        }
+        return url;
     }
     protected boolean checkTrue(boolean condition) {
         boolean pass = true;

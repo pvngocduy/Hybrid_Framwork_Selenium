@@ -11,9 +11,9 @@
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"></parameter>
         <parameter name="chromeOptions" value="--remote-allow-origins=* --allowed-ips=*"></parameter>
-        <parameter name="url" value="testing"></parameter>
+        <parameter name="environment" value="testing"></parameter>
         <classes>
-            <class name="testcases.com_nopcomerce_user.User02_Login"></class>
+            <class name="testcases.com_nopcomerce_user.Level_Multi_Envi_Register_Apply_PageObjectModel"></class>
         </classes>
     </test>
 <!--    <test name="Run on Edge">-->

@@ -4,6 +4,7 @@ import java.io.File;
 
 public class GlobalConstant {
     public static final String JAVA_VERSION = System.getProperty("java.version");
+    public static final String DEV_URL = "https://demo.guru99.com/";
     public static String PORTAL_DEV_URL = "https://demo.nopcommerce.com/";
     public static String ADMIN_DEV_URL ="https://admin-demo.nopcommerce.com/";
 

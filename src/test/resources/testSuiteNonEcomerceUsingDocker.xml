@@ -3,17 +3,23 @@
 <suite thread-count="4" name="testSuite" parallel="tests">
     <listeners>
         <listener class-name="actions.Utils.listeners.TestListener"></listener>
-<!--        <listener class-name="actions.commons.MethodListener"></listener>-->
-<!--        <listener class-name="actions.reportConfig.ReportNGListener"></listener>-->
-<!--        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>-->
-<!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
    </listeners>-->
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"></parameter>
-        <parameter name="chromeOptions" value="--remote-allow-origins=* --allowed-ips=*"></parameter>
-        <parameter name="url" value="testing"></parameter>
+        <parameter name="ipAddress" value="localhost"></parameter>
+        <parameter name="portNumber" value="4445"></parameter>
+        <parameter name="environment" value="testing"></parameter>
         <classes>
-            <class name="testcases.com_nopcomerce_user.User02_Login"></class>
+            <class name="testcases.com_nopcomerce_user.Level01_Multi_Envi_Docker"></class>
+        </classes>
+    </test>
+    <test name="Run on Firefox">
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="ipAddress" value="localhost"></parameter>
+        <parameter name="portNumber" value="4446"></parameter>
+        <parameter name="environment" value="testing"></parameter>
+        <classes>
+            <class name="testcases.com_nopcomerce_user.Level01_Multi_Envi_Docker"></class>
         </classes>
     </test>
 <!--    <test name="Run on Edge">-->
